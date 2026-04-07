@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply m-0 overflow-hidden;
+}
+
+#root {
+  @apply w-full max-w-none min-h-screen flex flex-col bg-gray-950 text-white;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+}
+
+.damage-number {
+  @apply absolute pointer-events-none font-black select-none z-50;
+  animation: floatUp 1s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+.damage-number.crit {
+  @apply text-yellow-400 text-2xl drop-shadow-[0_0_12px_rgba(250,204,21,0.6)];
+  animation: critFloat 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+.damage-number.normal {
+  @apply text-white text-lg opacity-80;
+}
+
+.enemy-shake {
+  animation: shake 0.15s ease-in-out;
+}
+
+.stage-flash {
+  @apply absolute inset-0 bg-white pointer-events-none z-[100];
+  animation: fadeFlash 0.3s ease-out forwards;
+}
+
+.cooldown-ring {
+  @apply absolute inset-0 rounded-full bg-black/40;
+}
+
+.glass-panel {
+  @apply bg-gray-900/40 backdrop-blur-md border border-white/5;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  20% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}
+
+@keyframes critFloat {
+  0% { transform: translateY(0) scale(0.2) rotate(-15deg); opacity: 0; }
+  20% { transform: translateY(-30px) scale(1.8) rotate(5deg); opacity: 1; }
+  100% { transform: translateY(-120px) scale(1.2) rotate(0deg); opacity: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px) rotate(-1deg); }
+  75% { transform: translateX(4px) rotate(1deg); }
+}
+
+@keyframes fadeFlash {
+  0% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s infinite ease-in-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+}
